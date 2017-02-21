@@ -1,0 +1,29 @@
+﻿<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>MessageID</th>
+            <th>Message</th>
+            <th>EmptyMessage</th>
+            <th>Date</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MessageID</td>
+                    <td>@item.Message</td>
+                    <td>@item.EmptyMessage</td>
+                    <td>@item.Date</td>
+                    <td>@Html.ActionLink("Delete", "Delete", "Home", new { MessageID = @item.MessageID }, null)</td>
+                    <td>@Html.ActionLink("Update", "Update", "Home", new { MessageID = @item.MessageID }, null)</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

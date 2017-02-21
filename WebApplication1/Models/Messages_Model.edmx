@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CRUD_SampleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="1000" />
+          <Property Name="EmptyMessage" Type="varchar" MaxLength="1000" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <Function Name="Delete_Messages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MessageID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Get_Messages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Count" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Get_MessagesbyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MessageID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Set_Messages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Message" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmptyMessage" Type="nvarchar" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Update_Messages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MessageID" Type="bigint" Mode="In" />
+          <Parameter Name="Message" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmptyMessage" Type="nvarchar" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="CRUD_SampleModelStoreContainer">
+          <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRUD_SampleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="EmptyMessage" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="CRUD_SampleEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Messages" EntityType="CRUD_SampleModel.Messages" />
+          <FunctionImport Name="Delete_Messages" ReturnType="Collection(Int32)">
+            <Parameter Name="MessageID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Get_Messages" ReturnType="Collection(CRUD_SampleModel.Get_Messages_Result)">
+            <Parameter Name="Count" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Get_MessagesbyID" ReturnType="Collection(CRUD_SampleModel.Get_MessagesbyID_Result)">
+            <Parameter Name="MessageID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Set_Messages" ReturnType="Collection(Int32)">
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="EmptyMessage" Mode="In" Type="String" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Messages" ReturnType="Collection(Int32)">
+            <Parameter Name="MessageID" Mode="In" Type="Int64" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="EmptyMessage" Mode="In" Type="String" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Get_Messages_Result">
+          <Property Type="Int64" Name="MessageID" Nullable="false" />
+          <Property Type="String" Name="Message" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="EmptyMessage" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Get_MessagesbyID_Result">
+          <Property Type="Int64" Name="MessageID" Nullable="false" />
+          <Property Type="String" Name="Message" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="EmptyMessage" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRUD_SampleModelStoreContainer" CdmEntityContainer="CRUD_SampleEntities">
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="CRUD_SampleModel.Messages">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="EmptyMessage" ColumnName="EmptyMessage" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Delete_Messages" FunctionName="CRUD_SampleModel.Store.Delete_Messages" />
+          <FunctionImportMapping FunctionImportName="Get_Messages" FunctionName="CRUD_SampleModel.Store.Get_Messages">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CRUD_SampleModel.Get_Messages_Result">
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="EmptyMessage" ColumnName="EmptyMessage" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_MessagesbyID" FunctionName="CRUD_SampleModel.Store.Get_MessagesbyID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CRUD_SampleModel.Get_MessagesbyID_Result">
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="EmptyMessage" ColumnName="EmptyMessage" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Set_Messages" FunctionName="CRUD_SampleModel.Store.Set_Messages" />
+          <FunctionImportMapping FunctionImportName="Update_Messages" FunctionName="CRUD_SampleModel.Store.Update_Messages" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

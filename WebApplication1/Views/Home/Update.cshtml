@@ -1,0 +1,34 @@
+﻿@model WebApplication1.Models.Messages
+@{
+    ViewBag.Title = "Update";
+}
+
+<link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="clearfix">&nbsp;</div>
+<div class="clearfix">&nbsp;</div>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Message</th>
+                    <th>EmptyMessage</th>
+                    <th>Date</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @using (Html.BeginForm("Update", "Home", FormMethod.Post))
+                    {
+                        <td>@Html.TextBoxFor(m => m.Message)</td>
+                        <td>@Html.TextBoxFor(m => m.EmptyMessage)</td>
+                        <td>@Html.TextBoxFor(m => m.Date)</td>
+                        <td><input type="submit" value="Update" class="btn btn-primary" /></td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

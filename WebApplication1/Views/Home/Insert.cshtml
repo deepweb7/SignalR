@@ -1,0 +1,40 @@
+﻿@model WebApplication1.Models.Messages
+@{
+    ViewBag.Title = "Insert";
+}
+<link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="clearfix">&nbsp;</div>
+<div class="clearfix">&nbsp;</div>
+<div class="container">
+    <div class="table-responsive col-md-6 col-md-offset-3">
+        <table class="table table-bordered table-striped">
+            <tbody>
+                @using (Html.BeginForm("Insert", "Home", FormMethod.Post))
+                {
+                    @*<tr>
+                        <td class="col-md-4">ID</td>
+                        <td class="col-md-8">@Html.TextBoxFor(m => m.Id)</td>
+                    </tr>*@
+                    <tr>
+                        <td class="col-md-4">Message</td>
+                        <td class="col-md-8">@Html.TextBoxFor(m => m.Message)</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">EmptyMessage</td>
+                        <td class="col-md-8">@Html.TextBoxFor(m => m.EmptyMessage)</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">Date</td>
+                        <td class="col-md-8">@Html.TextBoxFor(m => m.Date)</td>
+                    </tr>
+                    <tr>
+                        <td class="text-right" colspan="2"><input type="submit" value="Save" class="btn btn-primary" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+    @Html.ActionLink("Home", "Index", "Home")
+</div>
